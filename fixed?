@@ -1,0 +1,56 @@
+import java.util.Scanner;
+import java.util.Random;
+//Main class used for testing stuff, Test class will be referenced in this class for... testing.
+public class MainClass
+{
+    public static void main(String[] args)
+    {
+        int [] Coded = {18, 9 , 213, 55, 19, 22, 25, 81, 11, 90, 200, 111};
+        boolean unsolved = true;
+        Random stringShuffler = new Random();
+        int attempts = 0;
+        int progress = 0;
+
+        while(unsolved == true)
+        {
+            for(int i = 0; i <= Coded.length;)
+            {
+                if(Coded[i] <= Coded[i+1])
+                {
+
+                    //System.out.println("identify i:" + Coded[i]);
+                    //System.out.println("identify i+1: " + Coded[i+1]);
+                    i++;
+                    progress++;
+                    if(i+1 == 13)
+                    {
+                       unsolved = false;
+                       break;
+                    }
+                }
+                else
+                {
+                    attempts++;
+                    System.out.println("Sequence failed, shuffling");
+                    for(int k = 0; k < Coded.length; k++)
+                    {
+                        System.out.println("position " + k + ": " + Coded[k]);
+                    }
+                    int storage;
+                    for(int j = 0; j <= Coded.length-1; j++)
+                    {
+                        int shuffleboy = stringShuffler.nextInt(Coded.length);
+                        //System.out.println("Random number is " + shuffleboy);
+                        storage = Coded[shuffleboy];
+                        Coded[shuffleboy] = Coded[j];
+                        Coded[j] = storage;
+                    }
+                    System.out.println("amount correct: " + progress);
+                    System.out.println("attempt number: " + attempts);
+                    progress = 0;
+                    i = 0;
+                }
+            }
+        }
+    }
+}
